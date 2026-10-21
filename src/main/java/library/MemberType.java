@@ -1,4 +1,4 @@
-
+package library;
     enum MemberType {
         STUDENT(2, 14),
         STAFF(5, 30);
