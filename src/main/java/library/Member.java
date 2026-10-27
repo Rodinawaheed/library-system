@@ -1,5 +1,7 @@
 package library;
 
+import java.util.Objects;
+
 class Member {
     private final int id;
     private final String name;
@@ -31,4 +33,28 @@ class Member {
     public String toString() {
         return "#" + id + " " + name + " (" + type + ", max " + type.maxLoans() + " books)";
     }
+
+
+    @Override
+
+    public boolean equals(Object obj) {
+
+        if (this == obj) return true;
+
+        if (!(obj instanceof Member)) return false;
+
+        Member other = (Member) obj;
+
+        return id == other.id;
+
+    }
+
+    @Override
+
+    public int hashCode() {
+
+        return Objects.hash(id);
+
+    }
+
 }

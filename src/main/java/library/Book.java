@@ -1,5 +1,7 @@
 package library;
 
+import java.util.Objects;
+
 class Book {
 
     private final String isbn;
@@ -21,6 +23,8 @@ class Book {
         return title;
     }
 
+    String getAuthor(){return author;}
+
     boolean isAvailable() {
         return status == BookStatus.AVAILABLE;
     }
@@ -37,4 +41,18 @@ class Book {
     public String toString() {
         return title + " by " + author + " [" + status + "]";
     }
+
+@Override
+    public boolean equals (Object obj){
+        if (this==obj) return true;
+        if (!(obj instanceof Book)) return false;
+
+        Book other = (Book)  obj;
+        return Objects.equals(isbn, other.isbn);
+    }
+    @Override
+    public int hashCode(){
+        return Objects.hash(isbn);
+    }
+
 }
