@@ -1,3 +1,4 @@
+
 package com.flairs.libraryapi.controller;
 
 import com.flairs.libraryapi.dto.BookResponse;
@@ -74,8 +75,8 @@ public class BookController {
     private Book toBook(CreateBookRequest request) {
         return new Book(
                 null,
-                request.title(),
-                request.author(),
+                request.title().strip(),
+                request.author().strip(),
                 request.isbn(),
                 request.year(),
                 request.copies()
