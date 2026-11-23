@@ -110,36 +110,29 @@ An extension of the Library API introducing authentication and authorization.
 - Member and Librarian permissions
 - Protected REST API endpoints
 - Database migrations
--Unit Testing with JUnit and Mockito
+- Unit Testing with JUnit and Mockito
 
-Project folder: session-12/library-api/
+Project folder: `session-12/library-api/`
 
-Technologies Used
+---
 
-Java
+## Technologies Used
 
-Object-Oriented Programming (OOP)
+- Java
+- Object-Oriented Programming (OOP)
+- Java Collections Framework
+- Maven
+- Spring Boot
+- Spring Data JPA
+- REST APIs
+- Spring Security
+- JSON Web Tokens (JWT)
+- JUnit
+- Mockito
+- Git and GitHub
 
-Java Collections Framework
+---
 
-Maven
-
-Spring Boot
-
-Spring Data JPA
-
-REST APIs
-
-Spring Security
-
-JSON Web Tokens (JWT)
-
-JUnit
-
-Mockito
-
-Git and GitHub
-
-Project Status
+## Project Status
 
 This repository is continuously evolving as I progress through Java backend development and the Spring Boot Bootcamp. More features and projects may be added.
