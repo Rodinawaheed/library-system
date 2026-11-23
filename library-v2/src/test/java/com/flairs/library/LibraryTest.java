@@ -1,5 +1,4 @@
 
-
 package com.flairs.library;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -211,6 +210,45 @@ class LibraryTest {
 
         assertTrue(overdueLoans.isEmpty());
     }
+
+    // New test: returning the same book twice should fail.
+    @Test
+    void shouldNotAllowReturningBookTwice() {
+        library.addMember(
+                new Member(1, "Mona", MemberType.STUDENT)
+        );
+
+        LocalDate today = LocalDate.now();
+
+        library.borrow("111", 1, today);
+
+        library.returnBook("111", today.plusDays(5));
+
+        assertThrows(
+                LibraryException.class,
+                () -> library.returnBook("111", today.plusDays(6))
+        );
+    }
+
+    // New test: a loan is not overdue on its due date.
+    @Test
+    void shouldNotConsiderLoanOverdueOnDueDate() {
+        library.addMember(
+                new Member(1, "Mona", MemberType.STUDENT)
+        );
+
+        LocalDate borrowedOn = LocalDate.of(2026, 1, 1);
+
+        Loan loan = library.borrow("111", 1, borrowedOn);
+
+        List<Loan> overdueOnDueDate =
+                library.overdue(loan.dueOn());
+
+        assertTrue(overdueOnDueDate.isEmpty());
+
+        List<Loan> overdueAfterDueDate =
+                library.overdue(loan.dueOn().plusDays(1));
+
+        assertEquals(1, overdueAfterDueDate.size());
+    }
 }
-
-
