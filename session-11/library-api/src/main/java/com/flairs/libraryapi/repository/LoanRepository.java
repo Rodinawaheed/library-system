@@ -1,4 +1,3 @@
-
 package com.flairs.libraryapi.repository;
 
 import com.flairs.libraryapi.model.Loan;
@@ -14,11 +13,8 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
 
     long countByMember_IdAndReturnedAtIsNull(Long memberId);
 
-    long countByBook_IdAndReturnedAtIsNull(Long bookId);
+    long countByBookIdAndReturnedAtIsNull(Long bookId);
 
-    default long countByBookIdAndReturnedAtIsNull(Long bookId) {
-        return countByBook_IdAndReturnedAtIsNull(bookId);
-    }
 
     default long countByMemberIdAndReturnedAtIsNull(Long memberId) {
         return countByMember_IdAndReturnedAtIsNull(memberId);
@@ -33,7 +29,7 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
             """)
     Optional<Loan> findWithBookAndMemberById(@Param("id") Long id);
 
-    @EntityGraph(attributePaths = {"book", "member"})
+    @EntityGraph(attributePaths = {"book", "book.author", "member"})
     List<Loan> findByMember_IdOrderByBorrowedAtDesc(Long memberId);
 
     default List<Loan> findByMemberIdWithDetails(Long memberId) {

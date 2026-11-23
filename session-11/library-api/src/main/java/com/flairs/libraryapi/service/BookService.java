@@ -82,7 +82,7 @@ public class BookService {
     public void delete(Long id) {
         Book book = load(id);
 
-        if (loans.countByBook_IdAndReturnedAtIsNull(id) > 0) {
+        if (loans.countByBookIdAndReturnedAtIsNull(id) > 0) {
             throw new ConflictException("Book " + id + " is on loan and cannot be deleted");
         }
 
