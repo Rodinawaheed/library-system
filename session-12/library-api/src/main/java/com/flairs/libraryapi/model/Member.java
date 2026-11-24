@@ -1,3 +1,4 @@
+
 package com.flairs.libraryapi.model;
 
 import jakarta.persistence.Column;
@@ -24,7 +25,6 @@ public class Member {
     @Column(nullable = false, unique = true, length = 120)
     private String email;
 
-    // NEW in Session 12: the BCrypt hash, never the password itself
     @Column(name = "password_hash", nullable = false, length = 100)
     private String passwordHash;
 
@@ -34,6 +34,12 @@ public class Member {
 
     @Column(name = "joined_at", nullable = false, updatable = false)
     private Instant joinedAt = Instant.now();
+
+    @Column(name = "failed_login_attempts", nullable = false)
+    private int failedLoginAttempts = 0;
+
+    @Column(name = "locked_until")
+    private Instant lockedUntil;
 
     protected Member() {
     }
@@ -71,5 +77,21 @@ public class Member {
 
     public Instant getJoinedAt() {
         return joinedAt;
+    }
+
+    public int getFailedLoginAttempts() {
+        return failedLoginAttempts;
+    }
+
+    public void setFailedLoginAttempts(int failedLoginAttempts) {
+        this.failedLoginAttempts = failedLoginAttempts;
+    }
+
+    public Instant getLockedUntil() {
+        return lockedUntil;
+    }
+
+    public void setLockedUntil(Instant lockedUntil) {
+        this.lockedUntil = lockedUntil;
     }
 }
