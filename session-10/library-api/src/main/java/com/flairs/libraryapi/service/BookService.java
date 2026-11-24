@@ -1,4 +1,5 @@
 
+
 package com.flairs.libraryapi.service;
 
 import com.flairs.libraryapi.exception.BookNotFoundException;
@@ -48,12 +49,7 @@ public class BookService {
     public Book update(Long id, Book book) {
         findById(id);
 
-        boolean duplicateIsbn = repository.findAll().stream()
-                .anyMatch(existingBook ->
-                        !existingBook.id().equals(id)
-                                && existingBook.isbn().equals(book.isbn()));
-
-        if (duplicateIsbn) {
+        if (repository.existsByIsbnAndIdNot(book.isbn(), id)) {
             throw new DuplicateIsbnException(book.isbn());
         }
 

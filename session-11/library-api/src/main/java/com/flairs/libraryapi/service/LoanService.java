@@ -54,7 +54,7 @@ public class LoanService {
         Member member = members.findById(request.memberId())
                 .orElseThrow(() -> new NotFoundException("Member", request.memberId()));
 
-        long activeBookLoans = loans.countByBook_IdAndReturnedAtIsNull(book.getId());
+        long activeBookLoans = loans.countByBookIdAndReturnedAtIsNull(book.getId());
 
         if (activeBookLoans >= book.getCopies()) {
             throw new ConflictException("No available copies of this book");

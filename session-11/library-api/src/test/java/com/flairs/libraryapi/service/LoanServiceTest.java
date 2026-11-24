@@ -81,7 +81,7 @@ class LoanServiceTest {
 
     @Test
     void borrowSetsDueDateFromLoanDays() {
-        when(loans.countByBook_IdAndReturnedAtIsNull(1L)).thenReturn(0L);
+        when(loans.countByBookIdAndReturnedAtIsNull(1L)).thenReturn(0L);
         when(loans.countByMember_IdAndReturnedAtIsNull(1L)).thenReturn(0L);
         when(loans.save(any(Loan.class))).thenAnswer(inv -> inv.getArgument(0));
 
@@ -93,7 +93,7 @@ class LoanServiceTest {
 
     @Test
     void borrowFailsWhenAllCopiesAreOut() {
-        when(loans.countByBook_IdAndReturnedAtIsNull(1L)).thenReturn(2L);
+        when(loans.countByBookIdAndReturnedAtIsNull(1L)).thenReturn(2L);
 
         assertThatThrownBy(() -> service.borrow(new BorrowRequest(1L, 1L)))
                 .isInstanceOf(ConflictException.class)
@@ -104,7 +104,7 @@ class LoanServiceTest {
 
     @Test
     void borrowFailsWhenMemberHasMaxLoans() {
-        when(loans.countByBook_IdAndReturnedAtIsNull(1L)).thenReturn(0L);
+        when(loans.countByBookIdAndReturnedAtIsNull(1L)).thenReturn(0L);
         when(loans.countByMember_IdAndReturnedAtIsNull(1L)).thenReturn(3L);
 
         assertThatThrownBy(() -> service.borrow(new BorrowRequest(1L, 1L)))

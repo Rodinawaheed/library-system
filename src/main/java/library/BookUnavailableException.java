@@ -1,9 +1,9 @@
 package library;
 
-public class BookUnavailableException extends LibraryException{
+public class BookUnavailableException extends LibraryException {
 
-    public BookUnavailableException (String message){
-        super(message);;
+    public BookUnavailableException(String message) {
+        super(message);
     }
 
 }

@@ -1,5 +1,8 @@
+
 package com.flairs.libraryapi.repository;
+
 import com.flairs.libraryapi.model.Book;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -7,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -26,11 +30,22 @@ public class BookRepository {
     }
 
     public boolean existsByIsbn(String isbn) {
-        return store.values().stream().anyMatch(b -> b.isbn().equals(isbn));
+        return store.values().stream()
+                .anyMatch(book -> book.isbn().equals(isbn));
+    }
+
+    public boolean existsByIsbnAndIdNot(String isbn, Long excludedId) {
+        return store.values().stream()
+                .anyMatch(book ->
+                        book.isbn().equals(isbn)
+                                && !book.id().equals(excludedId));
     }
 
     public Book save(Book book) {
-        Book toStore = book.id() == null ? book.withId(nextId.getAndIncrement()) : book;
+        Book toStore = book.id() == null
+                ? book.withId(nextId.getAndIncrement())
+                : book;
+
         store.put(toStore.id(), toStore);
         return toStore;
     }
